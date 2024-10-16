@@ -1,22 +1,25 @@
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { useNavigate } from 'react-router-dom';
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { useNavigate } from "react-router-dom";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 import "./slider.css";
 
-import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
-import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from "react-icons/io";
+import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
+import {
+  IoIosArrowDropleftCircle,
+  IoIosArrowDroprightCircle,
+} from "react-icons/io";
 
-import image1 from '../../assets/Lifestyle/ClassicStarbust/classicStarbust2.jpeg';
-import image2 from '../../assets/CandleHolders/ch2.jpg';
-import image3 from '../../assets/CandleHolders/ch3.jpg';
-import image4 from '../../assets/CandleHolders/ch4.jpg';
-import image5 from '../../assets/CandleHolders/ch5.jpg';
-import image6 from '../../assets/CandleHolders/ch6.jpg';
-import image7 from '../../assets/CandleHolders/ch7.jpg';
+import image1 from "../../assets/Lifestyle/ClassicStarbust/classicStarbust2.jpeg";
+import image2 from "../../assets/CandleHolders/ch2.jpg";
+import image3 from "../../assets/CandleHolders/ch3.jpg";
+import image4 from "../../assets/CandleHolders/ch4.jpg";
+import image5 from "../../assets/CandleHolders/ch5.jpg";
+import image6 from "../../assets/CandleHolders/ch6.jpg";
+import image7 from "../../assets/CandleHolders/ch7.jpg";
 
 const products = [
   {
@@ -60,13 +63,12 @@ const products = [
     heading: "PSYCHE CANDLE HOLDERS",
     image: image7,
     price: "69.99",
-  }
+  },
 ];
 
 const SliderS = () => {
   const navigate = useNavigate();
 
-  // Navigate to product detail page on image click
   const handleClick = (id) => {
     navigate(`/decor/candleDecor/${id}`);
   };
@@ -95,66 +97,82 @@ const SliderS = () => {
           .slider-arrow-right {
             right: 5px;
           }
-            .swiper-pagination {
-      display: flex;
-      justify-content: center; /* Center the pagination bullets */
-      align-items: center;
-
-    }
+          .swiper-container {
+            position: relative;
+            padding-bottom: 40px; /* Add space for pagination */
+          }
+          .swiper-pagination {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            width: 100% !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
           .swiper-pagination-bullet {
-            background: #7D3E00;
-            opacity: 1;
+            width: 8px;
+            height: 8px;
+            background-color: #7D3E00;
+            opacity: 0.6;
             margin: 0 5px;
+            cursor: pointer;
           }
           .swiper-pagination-bullet-active {
-            background: #FFC170;
+            opacity: 1;
+            transform: scale(1.2);
           }
         `}
       </style>
 
-      <h1 className="text-7xl mt-20 text-center font-futura font-thin">HOME DECOR</h1>
+      <h1 className="text-7xl mt-20 text-center font-futura font-thin">
+        HOME DECOR
+      </h1>
 
-      <Swiper
-        effect={'coverflow'}
-        grabCursor={true}
-        centeredSlides={true}
-        loop={true}
-        slidesPerView={'auto'}
-        coverflowEffect={{
-          rotate: 0,
-          stretch: 0,
-          depth: 100,
-          modifier: 2.5,
-        }}
-        pagination={{
-          clickable: true, // Enables clickable pagination dots
-          el: '.swiper-pagination', // Targeting custom pagination element
-        }}
-        navigation={{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-          clickable: true,
-        }}
-        modules={[EffectCoverflow, Pagination, Navigation]}
-        className="swiper_container"
-      >
-        {products.map((product) => (
-          <SwiperSlide key={product.id} onClick={() => handleClick(product.id)} className="cursor-pointer">
-            <img src={product.image} alt={product.heading} />
-          </SwiperSlide>
-        ))}
-
-        {/* Custom left and right arrows */}
-        <div className="swiper-button-prev slider-arrow slider-arrow-left">
-          <IoIosArrowDropleftCircle size={20} />
-        </div>
-        <div className="swiper-button-next slider-arrow slider-arrow-right">
-          <IoIosArrowDroprightCircle size={20} />
-        </div>
-
-        {/* Pagination bullets */}
-        <div className="swiper-pagination mt-4"></div> {/* Pagination below slider */}
-      </Swiper>
+      <div className="swiper-container">
+        <Swiper
+          effect={"coverflow"}
+          grabCursor={true}
+          centeredSlides={true}
+          loop={true}
+          slidesPerView={"auto"}
+          coverflowEffect={{
+            rotate: 0,
+            stretch: 0,
+            depth: 100,
+            modifier: 2.5,
+          }}
+          pagination={{
+            clickable: true,
+            bulletClass: "swiper-pagination-bullet",
+            bulletActiveClass: "swiper-pagination-bullet-active",
+          }}
+          navigation={{
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+            clickable: true,
+          }}
+          modules={[EffectCoverflow, Pagination, Navigation]}
+          className="swiper_container"
+        >
+          {products.map((product) => (
+            <SwiperSlide
+              key={product.id}
+              onClick={() => handleClick(product.id)}
+              className="cursor-pointer"
+            >
+              <img src={product.image} alt={product.heading} />
+            </SwiperSlide>
+          ))}
+          <div className="swiper-button-prev slider-arrow slider-arrow-left">
+            <IoIosArrowDropleftCircle size={20} />
+          </div>
+          <div className="swiper-button-next slider-arrow slider-arrow-right">
+            <IoIosArrowDroprightCircle size={20} />
+          </div>
+        </Swiper>
+      </div>
     </div>
   );
 };
